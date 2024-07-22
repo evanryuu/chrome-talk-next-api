@@ -8,6 +8,7 @@ const path = require('path')
 
 // Instantiate
 const kuroshiro = new Kuroshiro()
+let initted = false
 
 const PUBLIC_PATH = './public';
 const DICT_PATH = 'kuromoji/dict';
@@ -16,6 +17,7 @@ const resolveDictFolderPath = () => {
   return path.resolve(process.cwd(), PUBLIC_PATH, DICT_PATH);
 };
 async function init() {
+  if (initted) return kuroshiro
   // Here uses async/await, you could also use Promise
   await kuroshiro.init(
     new KuromojiAnalyzer({
@@ -23,6 +25,7 @@ async function init() {
       dictPath: resolveDictFolderPath()
     })
   )
+  initted = true
 
   return kuroshiro
 }
