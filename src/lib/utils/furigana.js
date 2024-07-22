@@ -23,14 +23,15 @@ async function init() {
       dictPath: resolveDictFolderPath()
     })
   )
+
+  return kuroshiro
 }
 
-init()
 // Convert what you want
 // const result = await kuroshiro.convert(
 //   '感じ取れたら手を繋ごう、重なるのは人生のライン and レミリア最高！',
 //   { to: 'hiragana' },
 // );
 module.exports = {
-  kuroshiro,
+  init,
 }

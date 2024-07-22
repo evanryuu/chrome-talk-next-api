@@ -1,6 +1,6 @@
 import { Furigana } from '@/types'
 import { NextRequest } from 'next/server'
-import { kuroshiro } from '@/lib/utils/furigana'
+import { init } from '@/lib/utils/furigana'
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
         to: 'hiragana',
       },
     } = body
+    const kuroshiro = await init()
     const res = (await kuroshiro.convert(body.text, options)) as string
     console.log('-----', res)
     return Response.json({
@@ -19,7 +20,6 @@ export async function POST(req: NextRequest) {
     })
   } catch (err) {
     console.log('[furigana/convert] Error:', err)
-    // TODO 第一次请求时会失败
     return Response.json({
       message: 'error',
       data: null
