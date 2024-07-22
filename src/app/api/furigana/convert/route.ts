@@ -19,6 +19,10 @@ export async function POST(req: NextRequest) {
     })
   } catch (err) {
     console.log('[furigana/convert] Error:', err)
-    return Response.error()
+    // TODO 第一次请求时会失败
+    return Response.json({
+      message: 'error',
+      data: null
+    })
   }
 }
