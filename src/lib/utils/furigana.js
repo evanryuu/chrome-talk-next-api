@@ -6,16 +6,21 @@ const KuromojiAnalyzer = require('kuroshiro-analyzer-kuromoji').default
 const path = require('path')
 // import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji'
 
-const dictPath = path.resolve(__dirname, '../../../../../../public/kuromoji/dict')
-
 // Instantiate
 const kuroshiro = new Kuroshiro()
+
+const PUBLIC_PATH = './public';
+const DICT_PATH = 'kuromoji/dict';
+
+const resolveDictFolderPath = () => {
+  return path.resolve(process.cwd(), PUBLIC_PATH, DICT_PATH);
+};
 async function init() {
   // Here uses async/await, you could also use Promise
   await kuroshiro.init(
     new KuromojiAnalyzer({
       // dictPath: 'public/kuromoji/dict/',
-      dictPath
+      dictPath: resolveDictFolderPath()
     })
   )
 }
